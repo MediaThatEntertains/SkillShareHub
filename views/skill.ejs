@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Skill</title>
+</head>
+<body>
+    <h1>Add a New Skill</h1>
+    <form action="/skills/add" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" name="title" required>
+        <label for="description">Description:</label>
+        <textarea name="description" required></textarea>
+        <label for="category">Category:</label>
+        <input type="text" name="category" required>
+        <button type="submit">Add Skill</button>
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>
