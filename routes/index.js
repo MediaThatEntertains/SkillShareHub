@@ -6,7 +6,7 @@ const Skill = require('../models/skill');
 router.get('/', async (req, res) => {
     try {
         const skills = await Skill.find().populate('author');
-        res.render('index', { skills: skills });
+        res.sendFile('index.html', { root: 'views' });
     } catch (err) {
         res.status(500).send('Error fetching skills');
     }

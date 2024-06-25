@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Add Skill
 router.get('/add', isLoggedIn, (req, res) => {
-    res.render('skill');
+    res.sendFile('skill.html', { root: 'views' });
 });
 
 router.post('/add', isLoggedIn, async (req, res) => {
@@ -19,6 +19,16 @@ router.post('/add', isLoggedIn, async (req, res) => {
         res.redirect('/');
     } catch (err) {
         res.status(500).send('Error adding skill');
+    }
+});
+
+// API endpoint to fetch skills
+router.get('/api/skills', async (req, res) => {
+    try {
+        const skills = await Skill.find().populate('author');
+        res.json(skills);
+    } catch (err) {
+        res.status(500).send('Error fetching skills');
     }
 });
 

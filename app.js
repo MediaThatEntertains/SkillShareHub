@@ -5,6 +5,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const User = require('./models/user');
 const Skill = require('./models/skill');
+const path = require('path');
 const app = express();
 
 // Connect to MongoDB
@@ -15,14 +16,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Passport Config
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-// Set view engine
-app.set('view engine', 'ejs');
 
 // Routes
 app.use('/', require('./routes/index'));
